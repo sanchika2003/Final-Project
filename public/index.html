@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Catch the Creature Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="screen">
+        <h1>Catch the Creature</h1>
+        <button>Play Game</button>
+    </div>
+    <div class="screen">
+        <h2>Select Your Favourite Creature</h2>
+        <div class="elem-container">
+            <div class="elem">
+                <h4>Zombie</h4>
+                <img src="image-removebg-preview (1).png" alt="Zombie character">
+            </div>
+            <div class="elem">
+                <h4>Simba</h4>
+                <img src="image-removebg-preview (3).png" alt="Simba character">
+            </div>
+            <div class="elem">
+                <h4>Panda</h4>
+                <img src="image-removebg-preview (7).png" alt="Panda character">
+            </div>
+            <div class="elem">
+                <h4>Goblet</h4>
+                <img src="image-removebg-preview (9).png" alt="Goblet character">
+            </div>
+            <div class="elem">
+                <h4>Hippo</h4>
+                <img src="image-removebg-preview.png" alt="Hippo character">
+            </div>
+        </div>
+    </div>
+    <div class="screen">
+        <h4 id="game-over" style="display: none;">
+            GAME OVER <br>
+            PLAY AGAIN?
+        </h4>
+      
+        <div class="time-score">
+            <div class="score-block">
+                <span class="label">⏱ Time:</span>
+                <span class="value" id="time-value">0 : 0</span>
+            </div>
+            <div class="score-block">
+                <span class="label">🏆 Score:</span>
+                <span class="value" id="score-value">0</span>
+            </div>
+            <div class="score-block">
+                <span class="label">🏆 High Score:</span>
+                <span class="value" id="high-score">0</span>
+            </div>
+        </div>
+        <div class="playground"></div>
+    </div>
+    <div id="gameover-modal" class="modal">
+      <div id="gameover-box" class="modal-box">
+        <h2 id="modal-title">GAME OVER</h2>
+        <div id="modal-score"></div>
+        <div id="modal-name-entry" class="modal-name-entry">
+          <input id="modal-name" type="text" maxlength="16" placeholder="Enter your name">
+          <button id="modal-submit">Submit</button>
+        </div>
+        <div id="modal-leaderboard" class="modal-leaderboard">
+          <h3>Leaderboard</h3>
+          <ol id="modal-leaderboard-list"></ol>
+        </div>
+        <button id="modal-play-again">Play Again</button>
+      </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

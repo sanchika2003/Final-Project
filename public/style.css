@@ -1,0 +1,442 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    min-width: 100vw;
+    font-size: 16px;
+}
+body{
+    overflow: hidden;
+    overflow-x: hidden;
+}
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    min-width: 100vw;
+    padding: 0;
+    background-color: #8a1919be;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: all ease-out 0.6s;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+.screen.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+.screen h1{
+    font-family: DRAGON HUNTER;
+    font-size: 70px;
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 0 20px;
+}
+.screen button{
+    padding: 18px 35px;
+    font-size: 20px;
+    background-color: transparent;
+    border: 2px solid #E8D8C4;
+    color: #0c0c0c;
+    transition: all ease 0.1s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.screen button:active{
+    scale: 0.95;
+}
+.screen button:hover{
+    background-color:#e8ecee ;
+    color:#080808;
+}
+.screen h2{
+    font-size: 60px;
+    text-align: center;
+    padding: 0 20px;
+}
+.elem-container{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:40px;
+    flex-wrap: wrap;
+    gap: 4vw;
+    padding: 0 20px;
+}
+.elem{
+    border: 2px solid #E8D8C4;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    cursor: grab;
+    transition: all ease 0.3s;
+    width: 38vw;
+    max-width: 220px;
+    min-width: 120px;
+    margin-bottom: 2vw;
+    border-radius: 10px;
+}
+.elem:hover{
+    background-color:#0075BE ;
+}
+
+.elem img{
+    height: 100PX;
+    height: 18vw;
+    max-height: 120px;
+    min-height: 60px;
+    object-fit: contain;
+}
+.elem:hover h4{
+    color: #FFCC00;
+    transition: all ease 0.3s;
+}
+.elem:active{
+    cursor: grabbing;
+}
+
+
+.time-score {
+  width: 96%;
+  max-width: 900px;
+  margin: 2vw auto 18px auto;
+  padding: 3vw 4vw;
+  display: flex;
+  align-items: center;
+  border-radius: 3vw;
+  background: linear-gradient(90deg, #232526 0%, #414345 100%);
+  box-shadow: 0 2px 12px #0002;
+  justify-content: space-between;
+  border-bottom: none;
+  font-size: 1.1em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2vw;
+}
+.time-score h3, .time-score h5 {
+  font-size: 2.7em;
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.time-score h3 span, .time-score h5 span {
+  font-size: 1.4em;
+}
+.time-score h3::before {
+  content: '\23F1'; /* Clock emoji */
+  font-size: 1.2em;
+  margin-right: 8px;
+  color: #3ecf4c;
+}
+.time-score h5::before {
+  content: '\1F3C6'; /* Trophy emoji */
+  font-size: 1.2em;
+  margin-right: 8px;
+  color: #ffd700;
+}
+.playground{
+    height: 95%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.playground img{
+    height: 100px;
+    position:absolute;
+    object-fit: contain;
+}
+.screen:nth-child(1) h4{
+    position: absolute;
+    top: 50%;
+    margin-top: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    background-color: #000000e7;
+    color:rgb(0, 119, 255) ;
+    width: 100%;
+    padding: 30px;
+    font-size: 25px;
+   opacity: 0;
+   z-index: 9999;
+}
+
+/* Modal overlay and box */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-box {
+  background: #222;
+  color: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 4px 24px #0005;
+  min-width: 60vw;
+  max-width: 95vw;
+  padding: 6vw 4vw;
+}
+.modal-box h2 {
+  color: #ff5500;
+  font-family: 'DRAGON HUNTER', sans-serif;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+.modal-box h3 {
+  color: #ffd700;
+  margin-bottom: 8px;
+}
+.modal-leaderboard {
+  margin: 18px 0 10px 0;
+  text-align: left;
+}
+.modal-leaderboard ol {
+  font-size: 1.1em;
+  margin: 0 0 0 18px;
+  padding: 0;
+}
+.modal-name-entry {
+  margin: 15px 0;
+  display: none;
+}
+.modal-name-entry input {
+  font-size: 1.1em;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+.modal-name-entry button {
+  font-size: 1em;
+  padding: 6px 16px;
+  margin-left: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #ff5500;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-name-entry button:hover {
+  background: #ff8800;
+}
+#modal-play-again {
+  background: #ff5500;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1em;
+  padding: 10px 28px;
+  margin: 8px 6px 0 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#modal-play-again:hover {
+  background: #ff8800;
+}
+#timer-bar-container {
+  width: 90%;
+  height: 16px;
+  background: #333;
+  border-radius: 8px;
+  margin: 0 auto 18px auto;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #0003;
+}
+#timer-bar {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  transition: width 0.3s linear, background 0.3s linear;
+}
+#timer-bar.low {
+  background: linear-gradient(90deg, #ff8800, #ff2d2d);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .screen h1 {
+    font-size: 60px;
+  }
+  .screen h2 {
+    font-size: 50px;
+  }
+  .time-score h3, .time-score h5 {
+    font-size: 2.2em;
+  }
+}
+
+@media (max-width: 900px) {
+  .screen h1 {
+    font-size: 50px;
+  }
+  .screen h2 {
+    font-size: 40px;
+  }
+  .time-score h3, .time-score h5 {
+    font-size: 1.8em;
+  }
+  .elem {
+    width: 45vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .time-score {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5vw 2vw;
+    font-size: 0.95em;
+  }
+  .modal-box {
+    min-width: 90vw;
+    padding: 8vw 2vw;
+  }
+  .elem {
+    width: 80vw;
+    max-width: 98vw;
+    min-width: 80px;
+  }
+  .elem img {
+    height: 22vw;
+    max-height: 80px;
+    min-height: 40px;
+  }
+  h1, h2 {
+    font-size: 1.5em !important;
+  }
+  .screen h1 {
+    font-size: 40px;
+  }
+  .screen h2 {
+    font-size: 30px;
+  }
+  .screen button {
+    padding: 15px 30px;
+    font-size: 18px;
+  }
+  .time-score h3, .time-score h5 {
+    font-size: 1.5em;
+  }
+  .modal-name-entry input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .modal-name-entry button {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .screen h1 {
+    font-size: 30px;
+  }
+  .screen h2 {
+    font-size: 24px;
+  }
+  .screen button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+  .time-score h3, .time-score h5 {
+    font-size: 1.3em;
+  }
+  .elem {
+    width: 90vw;
+  }
+  .elem img {
+    height: 25vw;
+  }
+}
+
+/* For landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .screen h1 {
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+  .screen h2 {
+    font-size: 24px;
+  }
+  .elem-container {
+    margin-top: 20px;
+    gap: 2vw;
+  }
+  .elem {
+    width: 30vw;
+    padding: 10px;
+  }
+  .elem img {
+    height: 15vw;
+  }
+  .time-score {
+    margin: 1vw auto 10px auto;
+    padding: 2vw 3vw;
+  }
+  .time-score h3, .time-score h5 {
+    font-size: 1.2em;
+  }
+  .playground {
+    height: 90%;
+  }
+}
+
+.obstacle {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border: 2px solid #222288;
+}
+
+.rock {
+  box-shadow: none;
+  border: none;
+}
+
+.score-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+.score-block .label {
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff;
+}
+.score-block .value {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #fff;
+}
