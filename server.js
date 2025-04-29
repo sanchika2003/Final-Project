@@ -8,7 +8,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static('.'));
 
 // MongoDB Connection
 mongoose.connect('mongodb://localhost:27017/game-leaderboard', {
