@@ -365,8 +365,9 @@ const modalPlayAgain = document.getElementById('modal-play-again');
 async function getLeaderboard() {
     try {
         const response = await fetch('http://localhost:3000/api/scores');
-        const scores = await response.json();
-        return scores;
+        const data = await response.json();
+        // Handle both array and object with scores property
+        return Array.isArray(data) ? data : (data.scores || []);
     } catch (error) {
         console.error('Error fetching leaderboard:', error);
         return [];
@@ -380,12 +381,13 @@ var highScore = 0;
 // Function to update high score from leaderboard
 async function updateHighScore() {
     const scores = await getLeaderboard();
-    if (scores.length > 0) {
-        highScore = scores[0].score;
+    if (scores && scores.length > 0) {
+        const topScore = Math.max(...scores.map(s => s.score));
+        highScore = topScore;
         highScoreSpan.innerText = highScore;
     } else {
         highScore = 0;
-        highScoreSpan.innerText = 0;
+        highScoreSpan.innerText = '0';
     }
 }
 
@@ -402,6 +404,7 @@ async function saveLeaderboard(score, name) {
             body: JSON.stringify({ name, score })
         });
         const result = await response.json();
+        console.log('Score saved:', result);
         // Update high score if this score is higher
         if (score > highScore) {
             highScore = score;
@@ -431,13 +434,20 @@ function showModal(score) {
 }
 
 async function updateModalLeaderboard() {
-    const lb = await getLeaderboard();
-    modalLeaderboardList.innerHTML = '';
-    lb.forEach(function(entry) {
+    const scores = await getLeaderboard();
+    modalLeaderboardList.innerHTML = '<h3>Leaderboard</h3>';
+    if (scores && scores.length > 0) {
+        scores.sort((a, b) => b.score - a.score); // Sort by score in descending order
+        scores.forEach(function(entry, index) {
+            var li = document.createElement('li');
+            li.textContent = `${index + 1}. ${entry.name}: ${entry.score}`;
+            modalLeaderboardList.appendChild(li);
+        });
+    } else {
         var li = document.createElement('li');
-        li.textContent = `${entry.name}: ${entry.score}`;
+        li.textContent = 'No scores yet';
         modalLeaderboardList.appendChild(li);
-    });
+    }
 }
 
 modalPlayAgain.onclick = function() {
